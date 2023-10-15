@@ -1,0 +1,59 @@
+# docker-composeのバージョンを指定
+version: "3.9"
+
+# db(MySQL),app(Django)のコンテナを作成
+services:
+  app:
+    tty: true
+    # コンテナ名をappに設定
+    container_name: back-container
+    # DjangoのDockerfileをビルドする
+    build:
+      # ビルドコンテキストはカレントディレクトリ
+      context: .
+      dockerfile: containers/backend/Dockerfile
+    # ボリュームを指定
+    # ローカルのカレントディレクトリをコンテナの/codeにマウントする
+    # ローカルの/staticをコンテナの/staticにマウントする
+    volumes:
+      # - .:/code
+      - ./django_project:/code/django_project
+      # - ./static:/static
+    # ローカルの8000番ポートとコンテナの8000番ポートをつなぐ
+    ports:
+      - "8080:8080"
+    # シェルスクリプトを実行
+    command: >
+      sh -c '
+        python workshop/manage.py makemigrations --noinput &&
+        python workshop/manage.py migrate --noinput &&
+        # python workshop/manage.py collectstatic --noinput &&
+        python workshop/manage.py runserver 0.0.0.0:8080
+      '
+    # 環境変数を.envを使って設定
+    env_file:
+      - .env
+    # 先にdbを起動してからappを起動する
+    networks:
+      - backend_network
+
+  front:
+    # tty: true
+    container_name: front-container
+    build:
+      context: .
+      dockerfile: containers/frontend/Dockerfile
+    restart: always
+    volumes:
+      - ./node:/usr/src/app:cached
+    command: sh -c "cd front && npm install &&WATCHPACK_POLLING=true npm start"
+    ports:
+      - "3000:3000"
+
+networks:
+  backend_network:
+    driver: bridge
+
+volumes:
+  db_data:
+  static:
