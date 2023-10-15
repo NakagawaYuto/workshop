@@ -1,4 +1,4 @@
-# genovese
+# workshop
 
 ## 使い方
 - Docker Desktopを起動する
