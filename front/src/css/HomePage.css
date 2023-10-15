@@ -1,0 +1,13 @@
+.IconRapper {
+  background: #607d8b;
+  border-radius: 50;
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+}
+
+.BlogAddIcon {
+  color: #eceff1;
+  width: 50; 
+  height: 50;
+}

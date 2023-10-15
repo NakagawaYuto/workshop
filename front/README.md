@@ -12,6 +12,10 @@ npm install axios
 
 npm install @mui/material @emotion/react @emotion/styled
 
+### Material icon < Material icon を扱うためのライブラリ >
+
+npm install @mui/icons-material
+
 ## コンポーネント
 
 react では，各機能を部品単位で分けて，管理します．
