@@ -4,6 +4,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
+import { useNavigate } from 'react-router-dom';
 
 import './css/App.css';
 
@@ -13,11 +14,12 @@ import BlogPage from './components/BlogPage';
 import NotFound from "./components/NotFoundPage"; 
 
 function App() {
+  const navigate = useNavigate();
   return (
     <div className="App">
       <AppBar position='sticky' style={{ color: "#e0f2f1", backgroundColor: "#3c3c3c" }} >
         <Toolbar variant='dense'>
-          <IconButton edge='start' color='inherit' aria-label='menu'>
+          <IconButton edge='start' color='inherit' aria-label='menu' onClick={() => { navigate('/')}}>
             <MenuBookIcon/>
           </IconButton>
           <Typography variant='h6' color='inherit' style={{ fontFamily:'serif' }}>

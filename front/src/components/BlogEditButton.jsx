@@ -2,8 +2,6 @@ import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
 import { useNavigate } from 'react-router-dom';
 
-import '../css/HomePage.css';
-
 const BlogEditButton = () => {
   const navigate = useNavigate();
   return (
