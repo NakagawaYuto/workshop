@@ -26,7 +26,6 @@ function PaperComponent(props) {
   );
 }
 
-
 const Blog = () => {
   // パラメータから値を取得する.
   const params = useParams();
@@ -35,12 +34,58 @@ const Blog = () => {
 
   const [open, setOpen] = React.useState(false);
 
+  const [formData, setFormData] = React.useState({
+    comment: '', // コメントフィールド
+    blog: '',
+  });
+
   const handleClickOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+  
+    const dataToSend = {
+      comment: formData.comment, // コメントフィールドの値
+      blog: blog.id, // 隠し値
+    };
+    // const response = await axios.post('http://127.0.0.1:8080/comment/', dataToSend);
+
+    // CSRFトークンを取得
+    const csrfToken = window.csrfToken;
+
+    try {
+      // POSTリクエストを送信
+      const response = await axios.post(
+        'http://127.0.0.1:8080/comment/',
+        dataToSend, 
+        {
+          headers: {
+            'X-CSRFToken': csrfToken,  // CSRFトークンをヘッダーに含める
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+  
+      // レスポンスを処理する
+      console.log('Response:', response.data);
+    } 
+    catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
 
   React.useEffect(() => 
@@ -76,14 +121,12 @@ const Blog = () => {
           aria-labelledby="draggable-dialog-title"
         >
           <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
-            コメント追加
+            Comment
           </DialogTitle>
-          <DialogActions>
-            <Button autoFocus onClick={handleClose}>
-              Cancel
-            </Button>
-            <Button onClick={handleClose}>Subscribe</Button>
-          </DialogActions>
+          <form onSubmit={handleSubmit}>
+            <input type="text" name='comment' onChange={handleChange} placeholder="Comment"/>
+            <button type="submit">Submit</button>
+          </form>
         </Dialog>
       </Grid>
     </>
