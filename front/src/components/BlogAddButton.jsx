@@ -1,7 +1,7 @@
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
 
-const BlogAddButton = (setClickFlag) => {
+const BlogAddButton = ({onClick}) => {
   return (
     <>
       <IconButton 
@@ -16,7 +16,7 @@ const BlogAddButton = (setClickFlag) => {
           right: 50,
           boxShadow: '3px 3px 3px rgba(0,0,0,0.3)',
         }}
-        onClick={() => { setClickFlag(true)}}
+        onClick={() => {onClick()}}
       >
         <AddIcon 
           fontSize='large'
