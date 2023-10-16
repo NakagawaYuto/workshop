@@ -1,6 +1,7 @@
 import * as React from 'react';
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import Draggable from 'react-draggable';
 
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
@@ -8,14 +9,11 @@ import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-
 import Paper from '@mui/material/Paper';
 
-// import BlogAddButton from '../components/BlogAddButton';
-import Draggable from 'react-draggable';
+import CommentButton from '../components/CommentButton';
+
 
 function PaperComponent(props) {
   return (
@@ -62,41 +60,31 @@ const Blog = () => {
         </Grid>
         <Grid item>
           <Typography variant="subtitle1" style={{ marginBottom: 15, fontFamily:'serif' }} >
-            {blog.body}
+            {blog.url}
           </Typography>
         </Grid>
         <Grid item>
           <Typography variant="subtitle1" style={{ marginBottom: 15, fontFamily:'serif' }} >
-            <a target="_blank" href="https://www.google.com/"  rel="noreferrer" >
-              https://www.google.com/
-            </a>
+            {blog.body}
           </Typography>
         </Grid>
-        <Button variant="outlined" onClick={handleClickOpen}>
-        Open draggable dialog
-      </Button>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        PaperComponent={PaperComponent}
-        aria-labelledby="draggable-dialog-title"
-      >
-        <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
-          Subscribe
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            To subscribe to this website, please enter your email address here. We
-            will send updates occasionally.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button autoFocus onClick={handleClose}>
-            Cancel
-          </Button>
-          <Button onClick={handleClose}>Subscribe</Button>
-        </DialogActions>
-      </Dialog>
+        <CommentButton onClick={handleClickOpen}></CommentButton>
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          PaperComponent={PaperComponent}
+          aria-labelledby="draggable-dialog-title"
+        >
+          <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
+            コメント追加
+          </DialogTitle>
+          <DialogActions>
+            <Button autoFocus onClick={handleClose}>
+              Cancel
+            </Button>
+            <Button onClick={handleClose}>Subscribe</Button>
+          </DialogActions>
+        </Dialog>
       </Grid>
     </>
   );
