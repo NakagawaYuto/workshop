@@ -1,16 +1,13 @@
 import IconButton from '@mui/material/IconButton';
-import EditIcon from '@mui/icons-material/Edit';
-import { useNavigate } from 'react-router-dom';
+import AddIcon from '@mui/icons-material/Add';
 
-const BlogEditButton = () => {
-  const navigate = useNavigate();
+const BlogAddButton = (setClickFlag) => {
   return (
     <>
       <IconButton 
         edge='start' 
         color='inherit' 
         aria-label='menu' 
-        className="IconRapper"
         style={{
           background: '#607d8b',
           borderRadius: '50',
@@ -19,11 +16,10 @@ const BlogEditButton = () => {
           right: 50,
           boxShadow: '3px 3px 3px rgba(0,0,0,0.3)',
         }}
-        onClick={() => { navigate('/edit')}}
+        onClick={() => { setClickFlag(true)}}
       >
-        <EditIcon 
+        <AddIcon 
           fontSize='large'
-          className="BlogAddIcon"
           style={{
             color: '#eceff1',
             width: 50,
@@ -35,4 +31,4 @@ const BlogEditButton = () => {
   )
 }
 
-export default BlogEditButton;
+export default BlogAddButton;

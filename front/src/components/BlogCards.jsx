@@ -11,7 +11,7 @@ const BlogCards = ({ Blogs }) => {
   for (let i = 0; i < Blogs.length; i++) {
     const blog = Blogs[i]
     Cards.push(
-      <Grid item>
+      <Grid item key={blog.id}>
         <Card sx={{ maxWidth: 800 }} elevation={4} style={{margin: 10}}>
           <CardActionArea onClick={() => { navigate('/blog/'+String(blog.id))}}>
             <CardContent>

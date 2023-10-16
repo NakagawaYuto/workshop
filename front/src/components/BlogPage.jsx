@@ -5,16 +5,17 @@ import { useParams } from "react-router-dom";
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 
-const baseURL = "https://jsonplaceholder.typicode.com/posts/"
+
 
 const Blog = () => {
   // パラメータから値を取得する.
   const params = useParams();
   const [blog, setBlog] = React.useState(null);
+  const baseURL = "https://jsonplaceholder.typicode.com/posts/" + String(params.id)
 
   React.useEffect(() => 
     {
-      axios.get(baseURL+String(params.id)).then((response) => {
+      axios.get(baseURL).then((response) => {
         setBlog(response.data);
       });
     }, []);
@@ -34,7 +35,7 @@ const Blog = () => {
         </Grid>
         <Grid item>
           <Typography variant="subtitle1" style={{ marginBottom: 15, fontFamily:'serif' }} >
-            <a target="_blank" href="https://www.google.com/">
+            <a target="_blank" href="https://www.google.com/"  rel="noreferrer" >
               https://www.google.com/
             </a>
           </Typography>
