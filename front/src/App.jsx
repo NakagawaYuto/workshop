@@ -17,7 +17,7 @@ import AddPage from './Pages/AddPage';
 function App() {
   const navigate = useNavigate();
   return (
-    <div className="App">
+    <div className='App' >
       <AppBar position='sticky' style={{ color: "#e0f2f1", backgroundColor: "#3c3c3c" }} >
         <Toolbar variant='dense'>
           <IconButton edge='start' color='inherit' aria-label='menu' onClick={() => { navigate('/')}}>
