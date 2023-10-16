@@ -8,8 +8,8 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 
 // 自作コンポーネント
-import BlogCards from './BlogCards';
-import BlogEditButton from './BlogEditButton';
+import BlogCards from '../components/BlogCards';
+import BlogEditButton from '../components/BlogEditButton';
 
 
 const baseURL = "https://jsonplaceholder.typicode.com/posts"
