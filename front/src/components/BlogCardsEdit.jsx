@@ -10,7 +10,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
 
-const BlogCards = ({ Blogs }) => {
+const BlogCards = ({ Blogs, delTarget }) => {
   var Cards = [];
   for (let i = 0; i < Blogs.length; i++) {
     const blog = Blogs[i]
@@ -55,6 +55,9 @@ const BlogCards = ({ Blogs }) => {
                     background: '#8d6e63', 
                     margin:5,
                     boxShadow: '2px 2px 2px rgba(0,0,0,0.3)'
+                  }}
+                  onClick={() => {
+                    delTarget(blog.id);
                   }}
                 >
                   <DeleteIcon 
