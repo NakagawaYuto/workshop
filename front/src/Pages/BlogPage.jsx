@@ -6,13 +6,12 @@ import Draggable from 'react-draggable';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 
-import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 import Paper from '@mui/material/Paper';
 
 import CommentButton from '../components/CommentButton';
+import CommentCards from '../components/CommentCards';
 
 
 function PaperComponent(props) {
@@ -30,7 +29,12 @@ const Blog = () => {
   // パラメータから値を取得する.
   const params = useParams();
   const [blog, setBlog] = React.useState(null);
-  const baseURL = "http://127.0.0.1:8080/blog/" + String(params.id) + '/'
+  const [comments, setComments] = React.useState(null);
+
+  const blogURL = "http://127.0.0.1:8080/blog/" + String(params.id) + '/'
+  const commentURL = "http://127.0.0.1:8080/comment/"
+
+  const comments_for_this_blog = []
 
   const [open, setOpen] = React.useState(false);
 
@@ -90,11 +94,19 @@ const Blog = () => {
 
   React.useEffect(() => 
     {
-      axios.get(baseURL).then((response) => {
+      axios.get(blogURL).then((response) => {
         setBlog(response.data);
+      });
+      axios.get(commentURL).then((response) => {
+        setComments(response.data);
       });
     }, []);
   if (!blog) return null;
+  for (let i = 0; i < comments.length; i++) {
+    if(comments[i].blog == blog.id){
+      comments_for_this_blog.push(comments[i])
+    }
+  }
   return (
     <>
       <Grid container alignItems='center' justify='center' direction="column">
@@ -113,6 +125,7 @@ const Blog = () => {
             {blog.body}
           </Typography>
         </Grid>
+        <CommentCards Comments={comments_for_this_blog}></CommentCards>
         <CommentButton onClick={handleClickOpen}></CommentButton>
         <Dialog
           open={open}
