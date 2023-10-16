@@ -12,7 +12,7 @@ import BlogCards from '../components/BlogCards';
 import BlogEditButton from '../components/BlogEditButton';
 
 
-const baseURL = "https://jsonplaceholder.typicode.com/posts"
+const baseURL = "http://127.0.0.1:8080/blog/"
 
 const Home = () => {
   // ページ内で値を保持するために使う.
