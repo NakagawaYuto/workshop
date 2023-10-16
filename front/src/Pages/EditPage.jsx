@@ -3,16 +3,21 @@ import axios from "axios";
 
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
+import { useNavigate } from 'react-router-dom';
+
 
 import BlogCardsEdit from '../components/BlogCardsEdit';
 import BlogAddButton from '../components/BlogAddButton';
 
 
-const baseURL = "https://jsonplaceholder.typicode.com/posts"
+const baseURL = "http://127.0.0.1:8080/blog/"
 
 const Edit = () => {
   const [blogs, setBlogs] = React.useState(null);
-  const [dialog, setDialog] = React.useState(false);
+  const navigate = useNavigate();
+  function goToAddPage() {
+    navigate('/add/');
+  }
 
   // 初回ロード時の処理を記述する.
   React.useEffect(() => 
@@ -25,7 +30,6 @@ const Edit = () => {
 
   return (
     <>
-      {dialog}
       <Grid container alignItems='center' justify='center' direction="column">
         <Grid item>
           <Typography variant="h5" gutterBottom style={{ margin: 20, fontFamily:'serif' }}>
@@ -34,7 +38,7 @@ const Edit = () => {
         </Grid>
       </Grid>
       <BlogCardsEdit Blogs={blogs}></BlogCardsEdit>
-      <BlogAddButton setClickFlag={setDialog}></BlogAddButton>
+      <BlogAddButton onClick={goToAddPage}></BlogAddButton>
     </>
   );
 };

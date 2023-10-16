@@ -12,6 +12,7 @@ import HomePage from './Pages/HomePage';
 import EditPage from './Pages/EditPage';
 import BlogPage from './Pages/BlogPage';
 import NotFound from "./Pages/NotFoundPage"; 
+import AddPage from './Pages/AddPage';
 
 function App() {
   const navigate = useNavigate();
@@ -29,9 +30,10 @@ function App() {
       </AppBar>
       <Routes>
         <Route path="/" element={<HomePage/>} />
-        <Route path="/edit" element={<EditPage />} />
+        <Route path="/edit/" element={<EditPage />} />
         <Route path="/blog/:id" element={<BlogPage />} />
         <Route path="/*" element={<NotFound />} />
+        <Route path="/add/" element={<AddPage />} />
       </Routes>
     </div>
   );
