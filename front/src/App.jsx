@@ -8,10 +8,10 @@ import { useNavigate } from 'react-router-dom';
 
 import './css/App.css';
 
-import HomePage from './components/HomePage';
-import EditPage from './components/EditPage';
-import BlogPage from './components/BlogPage';
-import NotFound from "./components/NotFoundPage"; 
+import HomePage from './Pages/HomePage';
+import EditPage from './Pages/EditPage';
+import BlogPage from './Pages/BlogPage';
+import NotFound from "./Pages/NotFoundPage"; 
 
 function App() {
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ function App() {
             <MenuBookIcon/>
           </IconButton>
           <Typography variant='h6' color='inherit' style={{ fontFamily:'serif' }}>
-            本
+            本Book
           </Typography>
         </Toolbar>
       </AppBar>

@@ -4,8 +4,8 @@ import axios from "axios";
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 
-import BlogCardsEdit from './BlogCardsEdit';
-import BlogAddButton from './BlogAddButton';
+import BlogCardsEdit from '../components/BlogCardsEdit';
+import BlogAddButton from '../components/BlogAddButton';
 
 
 const baseURL = "https://jsonplaceholder.typicode.com/posts"
