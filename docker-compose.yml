@@ -9,6 +9,7 @@ services:
       dockerfile: containers/backend/Dockerfile
 
     volumes:
+      - .:/code
       - ./django_project:/code/django_project
     # ローカルのポート:コンテナのポート
     ports:
