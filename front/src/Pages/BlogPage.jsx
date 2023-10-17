@@ -2,10 +2,10 @@ import * as React from 'react';
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Draggable from 'react-draggable';
-
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import Paper from '@mui/material/Paper';
@@ -39,7 +39,7 @@ const Blog = () => {
   const [open, setOpen] = React.useState(false);
 
   const [formData, setFormData] = React.useState({
-    comment: '', // コメントフィールド
+    comment: '',
     blog: '',
   });
 
@@ -58,26 +58,9 @@ const Blog = () => {
       comment: formData.comment, // コメントフィールドの値
       blog: blog.id, // 隠し値
     };
-    // const response = await axios.post('http://127.0.0.1:8080/comment/', dataToSend);
-
-    // CSRFトークンを取得
-    const csrfToken = window.csrfToken;
 
     try {
-      // POSTリクエストを送信
-      const response = await axios.post(
-        'http://127.0.0.1:8080/comment/',
-        dataToSend, 
-        {
-          headers: {
-            'X-CSRFToken': csrfToken,  // CSRFトークンをヘッダーに含める
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-  
-      // レスポンスを処理する
-      console.log('Response:', response.data);
+      await axios.post('http://127.0.0.1:8080/comment/', dataToSend);
     } 
     catch (error) {
       console.error('Error:', error);
@@ -110,6 +93,7 @@ const Blog = () => {
   return (
     <>
       <Grid container alignItems='center' justify='center' direction="column">
+        {/* ここから投稿内容 */}
         <Grid item>
           <Typography variant="h3" gutterBottom style={{ margin: 20, fontFamily:'serif' }}>
             {blog.title}
@@ -127,6 +111,8 @@ const Blog = () => {
         </Grid>
         <CommentCards Comments={comments_for_this_blog}></CommentCards>
         <CommentButton onClick={handleClickOpen}></CommentButton>
+
+        {/* ここからコメント用Dialog */}
         <Dialog
           open={open}
           onClose={handleClose}
@@ -136,10 +122,37 @@ const Blog = () => {
           <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
             Comment
           </DialogTitle>
-          <form onSubmit={handleSubmit}>
-            <input type="text" name='comment' onChange={handleChange} placeholder="Comment"/>
-            <button type="submit">Submit</button>
-          </form>
+          <Grid item>
+            <TextField
+              id="outlined-multiline-flexible"
+              name='comment'
+              onChange={handleChange}
+              label="コメント"
+              multiline
+              maxRows={4}
+              style={{ 
+                margin: 20, 
+                fontFamily:'serif',
+                width: '50vw',
+              }}
+            />
+            <Button 
+              variant="contained" 
+              onClick={handleSubmit}
+              style={{
+                width: 100,
+                color: "#e0f2f1",
+                fontSize: 20,
+                fontFamily: 'serif',
+                background: "#3c3c3c",
+                padding: 3,
+                borderRadius: 5,
+                boxShadow: '5px 5px 5px rbga(0,0,0,0.3)',
+              }}
+              size="large"
+            >コメント
+            </Button>
+          </Grid>
         </Dialog>
       </Grid>
     </>
