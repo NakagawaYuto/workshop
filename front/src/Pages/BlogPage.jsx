@@ -77,17 +77,24 @@ const Blog = () => {
 
   React.useEffect(() => 
     {
-      axios.get(blogURL).then((response) => {
-        setBlog(response.data);
-      });
-      axios.get(commentURL).then((response) => {
-        setComments(response.data);
-      });
+      try {
+        axios.get(blogURL).then((response) => {
+          setBlog(response.data);
+        });
+        axios.get(commentURL).then((response) => {
+          setComments(response.data);
+        });
+      }
+      catch (error) {
+        console.error('Error fetching data:', error);
+      }
     }, []);
   if (!blog) return null;
-  for (let i = 0; i < comments.length; i++) {
-    if(comments[i].blog == blog.id){
-      comments_for_this_blog.push(comments[i])
+  if (comments !== null){
+    for (let i = 0; i < comments.length; i++) {
+      if(comments[i].blog === blog.id){
+        comments_for_this_blog.push(comments[i])
+      }
     }
   }
   return (
@@ -122,37 +129,38 @@ const Blog = () => {
           <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
             Comment
           </DialogTitle>
-          <Grid item>
-            <TextField
-              id="outlined-multiline-flexible"
-              name='comment'
-              onChange={handleChange}
-              label="コメント"
-              multiline
-              maxRows={4}
-              style={{ 
-                margin: 20, 
-                fontFamily:'serif',
-                width: '50vw',
-              }}
-            />
-            <Button 
-              variant="contained" 
-              onClick={handleSubmit}
-              style={{
-                width: 100,
-                color: "#e0f2f1",
-                fontSize: 20,
-                fontFamily: 'serif',
-                background: "#3c3c3c",
-                padding: 3,
-                borderRadius: 5,
-                boxShadow: '5px 5px 5px rbga(0,0,0,0.3)',
-              }}
-              size="large"
-            >コメント
-            </Button>
-          </Grid>
+          <TextField
+            id="outlined-multiline-flexible"
+            name='comment'
+            onChange={handleChange}
+            label="コメント"
+            multiline
+            maxRows={4}
+            style={{ 
+              margin: 20, 
+              fontFamily:'serif',
+              width: '50vw',
+              bottom: 20,
+            }}
+          />
+          <Button 
+            variant="contained" 
+            onClick={handleSubmit}
+            style={{
+              width: 100,
+              bottom: 10,
+              right: -200,
+              color: "#e0f2f1",
+              fontSize: 20,
+              fontFamily: 'serif',
+              background: "#3c3c3c",
+              padding: 3,
+              borderRadius: 5,
+              boxShadow: '5px 5px 5px rbga(0,0,0,0.3)',
+            }}
+            size="large"
+          >送信
+          </Button>
         </Dialog>
       </Grid>
     </>
