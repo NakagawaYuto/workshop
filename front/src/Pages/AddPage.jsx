@@ -14,12 +14,12 @@ const Add = () => {
   const [title, setTitle] = React.useState('');
   const [url, setURL] = React.useState('');
   const [body, setBody] = React.useState('');
-  const addBlog = () => {
+  const addBlog = async () => {
     const titleOk = title.length !== 0;
     const urlOk = url.length !== 0;
     const bodyOk = body.length !== 0;
     if (titleOk && urlOk && bodyOk) {
-      axios.post(baseURL, {
+      await axios.post(baseURL, {
         title: String(title),
         url: new URL(url),
         body: String(body),
@@ -70,7 +70,7 @@ const Add = () => {
             id="outlined-multiline-flexible"
             label="URL"
             multiline
-            maxRows={4}
+            maxRows={10}
             style={{ 
               margin: 20, 
               fontFamily:'serif',

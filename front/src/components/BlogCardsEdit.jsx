@@ -16,7 +16,7 @@ const BlogCards = ({ Blogs, delTarget }) => {
     const blog = Blogs[i]
     Cards.push(
       <Grid item key={blog.id}>
-        <Card sx={{ maxWidth: 800 }} elevation={4} style={{margin: 10}}>
+        <Card sx={{ width: '60vw' }}  elevation={4} style={{margin: 10}}>
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
               { blog.title }
@@ -31,7 +31,7 @@ const BlogCards = ({ Blogs, delTarget }) => {
               justifyContent="space-around"
               alignItems="center"
             >
-              <Grid item>
+              {/* <Grid item>
                 <IconButton
                   aria-label="edit"
                   size="inherit"
@@ -46,7 +46,7 @@ const BlogCards = ({ Blogs, delTarget }) => {
                   style={{ color: '#eceff1' }}
                 />
                 </IconButton>
-              </Grid>
+              </Grid> */}
               <Grid item> 
                 <IconButton 
                   aria-label="delete" 

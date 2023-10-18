@@ -60,7 +60,12 @@ const Blog = () => {
     };
 
     try {
-      await axios.post('http://127.0.0.1:8080/comment/', dataToSend);
+      await axios.post('http://127.0.0.1:8080/comment/', dataToSend)
+      .then(() => {
+        axios.get(commentURL).then((response) => {
+          setComments(response.data);
+        });
+      });
     } 
     catch (error) {
       console.error('Error:', error);
