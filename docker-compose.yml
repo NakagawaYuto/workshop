@@ -36,9 +36,14 @@ services:
     restart: always
     volumes:
       - ./front:/code/front
+      - node_modules:/code/front/node_modules
+
     command: sh -c "cd front && npm install &&WATCHPACK_POLLING=true npm start"
     ports:
       - "3000:3000"
+
+volumes:
+  node_modules:
 
 networks:
   backend_network:
