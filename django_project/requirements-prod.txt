@@ -1,0 +1,10 @@
+Django>=4.0
+gunicorn==21.2.0
+djangorestframework==3.14.0
+django-cors-headers==4.3.1
+mysqlclient==2.2.0
+uwsgi
+
+# for developing
+autopep8==2.0.2
+flake8==6.0.0

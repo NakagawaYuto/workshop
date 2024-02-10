@@ -21,9 +21,9 @@ services:
         # python django_project/manage.py collectstatic --noinput &&
         python django_project/manage.py runserver 0.0.0.0:8080
       '
-    # 環境変数を.envを使って設定
-    env_file:
-      - .env
+    # # 環境変数を.envを使って設定
+    # env_file:
+    #   - .env
     networks:
       - backend_network
 
